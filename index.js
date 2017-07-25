@@ -1,4 +1,4 @@
-const configs = require('./lib/configs');
+const configs = require('configurable');
 
 // A plugin is a Node module that exports a function which takes a `robot` argument
 module.exports = robot => {
@@ -7,7 +7,7 @@ module.exports = robot => {
     const {sender, number} = context.payload;
     const login = sender.login;
 
-    const config = await configs(context);
+    const config = await configs(context, './lib/defaults');
 
     return context.github.issues.createComment(context.repo({
       number,
