@@ -1,19 +1,16 @@
-global.__base = __dirname + '/';
-const configs = require('configurable');
-
-// A plugin is a Node module that exports a function which takes a `robot` argument
-module.exports = robot => {
-
+/**
+ * @typedef {Object} Config
+ * @prop {string} message
+ *
+ * Comments to remind a user to delete the branch from a merged pull request
+ * @param {Object} robot
+ * @param {Config} config
+ */
+module.exports = (robot, config) => {
   robot.on('pull_request.closed', async context => {
-    const {sender, number} = context.payload;
-    const login = sender.login;
-
-    const config = await configs(context, './lib/defaults');
-
     return context.github.issues.createComment(context.repo({
-      number,
-      body: config.remindMerge.message
+      number: context.payload.number,
+      body: config.message
     }));
   });
-
 };
