@@ -8,7 +8,7 @@ module.exports = robot => {
     const {sender, number} = context.payload;
     const login = sender.login;
 
-    const config = await configs(context, './lib/defaults');
+    const config = await configs(context, './lib/defaults', 'teacherbot.yml');
 
     return context.github.issues.createComment(context.repo({
       number,
