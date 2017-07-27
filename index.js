@@ -1,7 +1,6 @@
 /**
  * @typedef {Object} Config
- * @prop {string} existingCollaboratorMessage
- * @prop {string} newCollaboratorMessage
+ * @prop {string} message
  *
  * Anytime a user opens an issue, add them as a collaborator to the repository.
  * @param {Object} robot
