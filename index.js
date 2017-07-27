@@ -1,12 +1,22 @@
-// A plugin is a Node module that exports a function which takes a `robot` argument
-module.exports = robot => {
+/**
+ * @typedef {Object} Config
+ * @prop {string} existingCollaboratorMessage
+ * @prop {string} newCollaboratorMessage
+ *
+ * Anytime a user opens an issue, add them as a collaborator to the repository.
+ * @param {Object} robot
+ * @param {Config} [defaults]
+ */
+
+module.exports = (robot, defaults = {}) => {
   let config;
-  const defaults = Object.assign({}, {
+
+  defaults = Object.assign({}, {
     remindMerge:
     {
       message: ':wave: hiya Please remember to delete your branch after merging or closing if you haven\'t done so already.'
     }
-  } || {});
+  }, defaults || {});
 
   robot.on('pull_request.closed', async context => {
     const {number} = context.payload;
