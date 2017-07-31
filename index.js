@@ -5,9 +5,10 @@
  * Anytime a user opens an issue, add them as a collaborator to the repository.
  * @param {Object} robot
  * @param {Config} [defaults]
+ * @param {String} [configFilename]
  */
 
-module.exports = (robot, defaults = {}) => {
+module.exports = (robot, defaults = {}, configFilename = 'remind-merge.yml') => {
   let config;
 
   defaults = Object.assign({}, {
@@ -21,7 +22,7 @@ module.exports = (robot, defaults = {}) => {
     const {number} = context.payload;
 
     try {
-      config = await context.config('teacherbot.yml');
+      config = await context.config( configFilename );
     } catch (err) {
       config = defaults;
     }
