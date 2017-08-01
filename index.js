@@ -1,3 +1,12 @@
+const defaultsShape = {
+  message: 'string',
+};
+
+function checkForDefaults() {
+  const errors = Object.keys(defaultsShape).filter(key => !Object.prototype.hasOwnProperty.call(defaults, key));
+  if (errors.length > 0) errors.forEach(err => console.error(`Key \`${err}\` of type \`${defaultsShape[err]}\` is missing.`));
+}
+
 /**
  * @typedef {Object} Config
  * @prop {string} message
@@ -8,9 +17,7 @@
  * @param {String} [configFilename]
  */
 module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
-  if (!defaults.message) {
-    throw new Error('You need to include a `message` string in your `defaults` object.');
-  }
+  checkForDefaults(defaults);
   
   robot.on('pull_request.closed', async context => {
     const {number} = context.payload;
