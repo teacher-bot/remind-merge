@@ -2,7 +2,7 @@ const defaultsShape = {
   message: 'string',
 };
 
-function checkForDefaults() {
+function checkForDefaults(defaults) {
   const errors = Object.keys(defaultsShape).filter(key => !Object.prototype.hasOwnProperty.call(defaults, key));
   if (errors.length > 0) errors.forEach(err => console.error(`Key \`${err}\` of type \`${defaultsShape[err]}\` is missing.`));
 }
