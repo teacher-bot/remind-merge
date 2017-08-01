@@ -4,32 +4,23 @@
  *
  * Anytime a user opens an issue, add them as a collaborator to the repository.
  * @param {Object} robot
- * @param {Config} [defaults]
+ * @param {Config} defaults
  * @param {String} [configFilename]
  */
-
-module.exports = (robot, defaults = {}, configFilename = 'remind-merge.yml') => {
-  let config;
-
-  defaults = Object.assign({}, {
-    remindMerge:
-    {
-      message: ':wave: hiya Please remember to delete your branch after merging or closing if you haven\'t done so already.'
-    }
-  }, defaults || {});
-
+module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
+  if (!defaults.message) {
+    throw new Error('You need to include a `message` string in your `defaults` object.');
+  }
+  
   robot.on('pull_request.closed', async context => {
     const {number} = context.payload;
 
-    try {
-      config = await context.config( configFilename );
-    } catch (err) {
-      config = defaults;
-    }
+    const repoConfig = await context.config(configFilename);
+    const config = Object.assign({}, defaults, repoConfig);
 
     return context.github.issues.createComment(context.repo({
       number,
-      body: config.remindMerge.message
+      body: config.message
     }));
   });
 };
