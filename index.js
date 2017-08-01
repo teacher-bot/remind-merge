@@ -22,8 +22,14 @@ module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
   robot.on('pull_request.closed', async context => {
     const {number} = context.payload;
 
-    const repoConfig = await context.config(configFilename);
-    const config = Object.assign({}, defaults, repoConfig);
+    let repoConfig;
+    try {
+      repoConfig = await context.config(configFilename);
+    } catch (err) {
+      repoConfig = defaults;
+    }
+
+    const config = Object.assign(defaults, repoConfig);
 
     return context.github.issues.createComment(context.repo({
       number,
