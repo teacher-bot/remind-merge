@@ -11,14 +11,14 @@ function checkForDefaults(defaults) {
  * @typedef {Object} Config
  * @prop {string} message
  *
- * Anytime a user opens an issue, add them as a collaborator to the repository.
+ * Anytime a user merges a pull request, they are reminded to delete their branch.
  * @param {Object} robot
  * @param {Config} defaults
  * @param {String} [configFilename]
  */
 module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
   checkForDefaults(defaults);
-  
+
   robot.on('pull_request.closed', async context => {
     const {number} = context.payload;
 
@@ -35,4 +35,13 @@ module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
       body: config.message
     }));
   });
+
+  console.log('Yay, the teacher-bot/remind-merge plugin was loaded!');
+
+  // For more information on building plugins:
+  // https://github.com/probot/probot/blob/master/docs/plugins.md
+
+  // To get your plugin running against GitHub, see:
+  // https://github.com/probot/probot/blob/master/docs/development.md
+
 };
