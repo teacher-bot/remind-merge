@@ -20,8 +20,9 @@ remindMerge: {
 ### Permissions
 
 When you enable this app, it will have [access to certain permissions](https://developer.github.com/v3/apps/permissions/). You will need to select:
-- `GET /repositories/:repository_id/pulls/:id/merge (:read)`
-- `POST /repositories/:repository_id/pulls/comments (:write) [B]`
+- Read access to code
+- Read access to metadata and single file
+- Read and write access to administration, commit statuses, issues, and pull requests
 
 ### But why?
 
