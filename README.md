@@ -1,31 +1,36 @@
 # Add issue openers as collaborators
 
-This [Probot](https://github.com/probot/probot/) [plugin](https://github.com/probot/probot/#plugins) automatically adds individuals that open a new issue as collaborators in your repository.
+This [Probot](https://github.com/probot/probot/) [plugin](https://github.com/probot/probot/#plugins) automatically reminds users to delete their branch after the merge a pull request.
 
 ### Get Started
 
 1. Install this app
 1. You're done! But you can also customize the responses.
 
-### Customized Responses
+### Configuring Customized Responses
 
 You can use the [default responses](lib/defaults.js), but if you'd like to specify your own, create a file inside a `.github` folder, titled `teacherbot.yml` and include the following text:
 
 ```yml
-addCollaborators:
-  newCollaboratorMessage: "This message will appear when someone opens a new issue, and is not already a collaborator."
-  existingCollaboratorMessage: "This message appears when someone is already a collaborator and they open a new issue."
+remindMerge: {
+    message: ':wave: hiya Please remember to delete your branch after merging or closing if you haven\'t done so already.'
+  }
 ```
+
+### Permissions
+
+When you enable this app, it will have [access to certain permissions](https://developer.github.com/v3/apps/permissions/). You will need to select:
+- `GET /repositories/:repository_id/pulls/:id/merge (:read)`
+- `POST /repositories/:repository_id/pulls/comments (:write) [B]`
 
 ### But why?
 
-Perhaps you want people to be able to add labels to their own newly created issues, or you want your users to automatically become collaborators as part of a [tutorial or self-paced course](https://services.github.com/on-demand/intro-to-github/join-class-repository). The possibilities are endless.
+Perhaps you maintain a project with many contributors and you'd like to keep stale branches from piling up, or you want your users to automatically become collaborators as part of a [tutorial or self-paced course](https://services.github.com/on-demand/intro-to-github/join-class-repository). The possibilities are endless.
 
 ### Features
 
-- Responds to newly opened issues.
+- Responds to recently merged pull requests.
 - Allows for customized responses.
-- Grants individuals collaborator access upon the creation of an issue.
 
 ### Getting Help and Contributing
 
