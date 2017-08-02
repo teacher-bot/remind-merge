@@ -18,7 +18,7 @@ function checkForDefaults(defaults) {
  */
 module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
   checkForDefaults(defaults);
-  
+
   robot.on('pull_request.closed', async context => {
     const {number} = context.payload;
 
@@ -35,4 +35,13 @@ module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
       body: config.message
     }));
   });
+
+  console.log('Yay, the teacher-bot/remind-merge plugin was loaded!');
+
+  // For more information on building plugins:
+  // https://github.com/probot/probot/blob/master/docs/plugins.md
+
+  // To get your plugin running against GitHub, see:
+  // https://github.com/probot/probot/blob/master/docs/development.md
+
 };
