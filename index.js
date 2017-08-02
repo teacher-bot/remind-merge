@@ -25,7 +25,7 @@ module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
     let config;
     try {
       const {remindMerge} = await context.config(configFilename);
-      config = Object.assign(defaults, remindMerge);
+      config = Object.assign({}, defaults, remindMerge);
     } catch (err) {
       config = defaults;
     }
