@@ -11,7 +11,7 @@ function checkForDefaults(defaults) {
  * @typedef {Object} Config
  * @prop {string} message
  *
- * Anytime a user opens an issue, add them as a collaborator to the repository.
+ * Anytime a user merges a pull request, they are reminded to delete their branch.
  * @param {Object} robot
  * @param {Config} defaults
  * @param {String} [configFilename]
