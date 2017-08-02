@@ -22,7 +22,7 @@ You can use the [default responses](lib/defaults.js), but if you'd like to speci
 
 ```yml
 remindMerge: 
-    message: ":wave: hiya Please remember to delete your branch after merging or closing if you haven\'t done so already."
+    message: ":wave: hiya Please remember to delete your branch after merging or closing if you haven't done so already."
 ```
 
 ### Running your own instance of this app
