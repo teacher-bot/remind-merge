@@ -41,27 +41,32 @@ module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
     }
 
 
-    let exec = require('child_process').exec, deleteBranch;
+    let exec = require('child_process').exec,
+      deleteBranch;
 
     deleteBranch = exec('git push ' + remote + ' -d ' + branchName,
-        function (error, stdout, stderr) {
-            console.log('stdout: ' + stdout);
-            console.log('stderr: ' + stderr);
-            if (error !== null) {
-                 console.log('exec error: ' + error);
-            }
-        });
+      function(error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+          console.log('exec error: ' + error);
+        }
+      });
 
 
-    function commentAndCleanup (){
+    function commentAndCleanup() {
       if (merged == "merged") {
-        setTimeout(exec(),160000);
+        setTimeout(function() {
+          exec
+        }, 1600000);
         return context.github.issues.createComment(context.repo({
           number,
           body: "Congratulations! You merged your branch! Now, please delete your branch. If you don't delete your branch within two minutes, I'll go ahead and delete it for you."
         }));
-      } else if (merged == "closed"){
-        setTimeout(exec(),160000);
+      } else if (merged == "closed") {
+        setTimeout(function() {
+          exec
+        }, 1600000);
         return context.github.issues.createComment(context.repo({
           number,
           body: "Are you sure you want to close this pull request without merging it? If you don't re-open this pull request or delete your branch within two minutes, I'll go ahead and delete your branch for you. Good luck!"
