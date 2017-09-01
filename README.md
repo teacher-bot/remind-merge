@@ -21,8 +21,9 @@ Perhaps you maintain a project with many contributors and you'd like to keep sta
 You can use the [default responses](https://github.com/teacher-bot/teacherbot/blob/master/index.js), but if you'd like to specify your own, create a file inside a `.github` folder, named `teacherbot.yml` and include the following text:
 
 ```yml
-remindMerge: 
-    message: ":wave: hiya Please remember to delete your branch after merging or closing if you haven't done so already."
+remindMerge:
+    merged: ":wave: hiya Please remember to delete your branch after merging or closing if you haven't done so already.",
+    unmerged: "It looks like you closed this Pull Request without merging. If you need any help, just ask!"
 ```
 
 ### Running your own instance of this app
