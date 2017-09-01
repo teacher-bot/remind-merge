@@ -1,5 +1,6 @@
 const defaultsShape = {
-  message: 'string',
+  merged: 'string',
+  unmerged: 'string'
 };
 
 function checkForDefaults(defaults) {
@@ -16,11 +17,15 @@ function checkForDefaults(defaults) {
  * @param {Config} defaults
  * @param {String} [configFilename]
  */
-module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
+module.exports = (robot, defaults = {merged: "Congratulations! You've merged!", unmerged: "You haven't merged yet, don't forget you can ask for help."}, configFilename = 'remind-merge.yml') => {
   checkForDefaults(defaults);
 
   robot.on('pull_request.closed', async context => {
+
     const {number} = context.payload;
+
+    // separate whether the pull request was merged or not
+    const merged = context.payload.pull_request.merged;
 
     let config;
     try {
@@ -32,7 +37,7 @@ module.exports = (robot, defaults, configFilename = 'remind-merge.yml') => {
 
     return context.github.issues.createComment(context.repo({
       number,
-      body: config.message
+      body: merged ? config.merged : config.unmerged
     }));
   });
 

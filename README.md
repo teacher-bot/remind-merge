@@ -1,6 +1,6 @@
 # Add issue openers as collaborators
 
-This [Probot](https://github.com/probot/probot/) [plugin](https://github.com/probot/probot/#plugins) automatically reminds users to delete their branch after the merge or close a pull request.
+This [Probot](https://github.com/probot/probot/) [plugin](https://github.com/probot/probot/#plugins) automatically reminds users to delete their branch after the merge or close a pull request. It can be used by itself, or as part of a collection of plugins called [Teacherbot](https://github.com/teacher-bot/teacherbot/).
 
 ### But why?
 
@@ -8,6 +8,7 @@ Perhaps you maintain a project with many contributors and you'd like to keep sta
 
 ### Features
 
+- Responds to pull requests that are closed without merging.
 - Responds to recently merged pull requests.
 - Allows for customized responses.
 
@@ -18,11 +19,15 @@ Perhaps you maintain a project with many contributors and you'd like to keep sta
 
 ### Configuring Customized Responses
 
-You can use the [default responses](https://github.com/teacher-bot/teacherbot/blob/master/index.js), but if you'd like to specify your own, create a file inside a `.github` folder, named `teacherbot.yml` and include the following text:
+You can use the [default responses](https://github.com/teacher-bot/teacherbot/blob/master/index.js), but if you'd like to specify your own:
+
+- If you're using this plugin as part of [Teacherbot](https://github.com/teacher-bot/teacherbot/): create a file inside a `.github` folder, named `teacherbot.yml` and include the text below.
+- If you're using this plugin standalone: create a file inside a `.github` folder, named `remind-merge.yml` and include the text below.
 
 ```yml
-remindMerge: 
-    message: ":wave: hiya Please remember to delete your branch after merging or closing if you haven't done so already."
+remindMerge:
+  merged: ":wave: hiya Please remember to delete your branch after merging or closing if you haven't done so already.",
+  unmerged: "It looks like you closed this Pull Request without merging. If you need any help, just ask!"
 ```
 
 ### Running your own instance of this app
