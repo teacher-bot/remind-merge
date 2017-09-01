@@ -17,7 +17,7 @@ function checkForDefaults(defaults) {
  * @param {Config} defaults
  * @param {String} [configFilename]
  */
-module.exports = (robot, defaults = {merged: "You've merged!", unmerged: "You didn't merge."}, configFilename = 'remind-merge.yml') => {
+module.exports = (robot, defaults = {merged: "Congratulations! You've merged!", unmerged: "You haven't merged yet, don't forget you can ask for help."}, configFilename = 'remind-merge.yml') => {
   checkForDefaults(defaults);
 
   robot.on('pull_request.closed', async context => {
